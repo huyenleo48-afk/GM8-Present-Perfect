@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Past Simple vs Present Perfect Quiz</title>
+<style>
+  :root{
+    --bg:#eef4ff; --card:#ffffff; --ink:#1f2a44; --muted:#5b6b8c;
+    --primary:#3b82f6; --primary-dark:#2563eb;
+    --ok:#16a34a; --ok-bg:#dcfce7; --bad:#dc2626; --bad-bg:#fee2e2;
+    --line:#d7e2f7; --warn-bg:#fff7e0;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",Roboto,Arial,sans-serif;background:linear-gradient(160deg,#eaf2ff,#f6efff);color:var(--ink);min-height:100vh;display:flex;justify-content:center;padding:16px}
+  .app{width:100%;max-width:720px}
+  .card{background:var(--card);border-radius:20px;box-shadow:0 8px 28px rgba(40,70,140,.12);padding:24px;margin-bottom:16px}
+  h1{margin:0 0 6px;font-size:26px;text-align:center}
+  .sub{text-align:center;color:var(--muted);margin:0 0 18px}
+  .emoji{font-size:48px;text-align:center}
+  .guide{background:var(--warn-bg);border-radius:14px;padding:14px 16px;font-size:15px;line-height:1.55;margin:14px 0}
+  .guide b{color:#b45309}
+  .guide code{background:#fff;padding:1px 6px;border-radius:6px;border:1px solid #f0dca0}
+  button{font-family:inherit;cursor:pointer}
+  .btn{background:var(--primary);color:#fff;border:0;border-radius:14px;padding:14px 26px;font-size:18px;font-weight:700;transition:.15s;display:block;margin:14px auto 0}
+  .btn:hover{background:var(--primary-dark);transform:translateY(-1px)}
+  .btn.secondary{background:#e8eefc;color:var(--primary-dark)}
+  .hidden{display:none!important}
+  .top{display:flex;justify-content:space-between;align-items:center;font-weight:700;margin-bottom:8px;font-size:15px}
+  .bar{height:12px;background:#e3ebfb;border-radius:99px;overflow:hidden;margin-bottom:18px}
+  .bar>div{height:100%;width:0;background:linear-gradient(90deg,#60a5fa,#8b5cf6);transition:width .3s}
+  .qtext{font-size:20px;font-weight:700;line-height:1.45;margin:0 0 6px}
+  .hint{color:var(--muted);font-size:15px;margin:0 0 16px;font-style:italic}
+  .opt{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:#f7f9ff;border:2px solid var(--line);border-radius:14px;padding:13px 14px;margin-bottom:10px;font-size:17px;color:var(--ink);transition:.15s}
+  .opt:hover:not(:disabled){border-color:var(--primary);background:#eef4ff}
+  .opt .letter{flex:0 0 32px;height:32px;border-radius:50%;background:#dbe6ff;color:var(--primary-dark);display:flex;align-items:center;justify-content:center;font-weight:800}
+  .opt.correct{background:var(--ok-bg);border-color:var(--ok)}
+  .opt.correct .letter{background:var(--ok);color:#fff}
+  .opt.wrong{background:var(--bad-bg);border-color:var(--bad)}
+  .opt.wrong .letter{background:var(--bad);color:#fff}
+  .opt:disabled{cursor:default}
+  .feedback{border-radius:14px;padding:14px 16px;margin-top:6px;line-height:1.55;font-size:16px}
+  .feedback.ok{background:var(--ok-bg);border-left:6px solid var(--ok)}
+  .feedback.bad{background:var(--bad-bg);border-left:6px solid var(--bad)}
+  .feedback .title{font-weight:800;font-size:18px;margin-bottom:4px}
+  .score{font-size:60px;font-weight:900;text-align:center;color:var(--primary-dark);margin:6px 0}
+  .score small{font-size:28px;color:var(--muted)}
+  .msg{text-align:center;font-size:18px;margin-bottom:10px}
+  .review h3{margin:18px 0 8px}
+  .ritem{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px;font-size:15px;line-height:1.5}
+  .ritem.r-ok{background:#f3fdf6}
+  .ritem.r-bad{background:#fff5f5}
+  .tag{font-weight:800}
+  .r-ok .tag{color:var(--ok)} .r-bad .tag{color:var(--bad)}
+  @media(max-width:480px){.card{padding:16px}.qtext{font-size:18px}.opt{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- Màn hình bắt đầu -->
+  <div class="card" id="start">
+    <div class="emoji">📘</div>
+    <h1>Past Simple vs Present Perfect</h1>
+    <p class="sub">Trắc nghiệm 20 câu – Viết lại câu &amp; chọn đáp án đúng</p>
+    <div class="guide">
+      <b>Nhắc nhanh về Hiện tại hoàn thành:</b><br>
+      • Cấu trúc: <code>S + have/has + V3 (quá khứ phân từ)</code><br>
+      • Dùng với <code>since</code> (mốc thời gian), <code>for</code> (khoảng thời gian), <code>just</code>, <code>ever</code>, <code>never</code>, <code>already</code>, <code>yet</code>.<br>
+      • Hành động bắt đầu ở quá khứ và còn kéo dài đến hiện tại, hoặc có kết quả ở hiện tại.<br>
+      • <b>Quá khứ đơn</b> dùng khi có mốc thời gian đã qua rõ ràng: <code>yesterday, last night, in 2018, ago, in 1791</code>.
+    </div>
+    <p class="sub">Mỗi câu sẽ có giải thích bằng tiếng Việt sau khi em chọn. Cố lên nhé! 💪</p>
+    <button class="btn" id="startBtn">Bắt đầu làm bài ▶</button>
+  </div>
+
+  <!-- Màn hình câu hỏi -->
+  <div class="card hidden" id="quiz">
+    <div class="top"><span id="qnum">Câu 1/20</span><span id="live">✅ Đúng: 0</span></div>
+    <div class="bar"><div id="prog"></div></div>
+    <p class="qtext" id="qtext"></p>
+    <p class="hint" id="qhint"></p>
+    <div id="opts"></div>
+    <div id="fb" class="feedback hidden"></div>
+    <button class="btn hidden" id="nextBtn">Câu tiếp theo ▶</button>
+  </div>
+
+  <!-- Màn hình kết quả -->
+  <div class="card hidden" id="result">
+    <div class="emoji" id="rEmoji">🎉</div>
+    <h1>Kết quả của em</h1>
+    <div class="score"><span id="rScore">0</span><small> / 20</small></div>
+    <p class="msg" id="rMsg"></p>
+    <div class="review">
+      <h3>Xem lại bài làm</h3>
+      <div id="reviewList"></div>
+    </div>
+    <button class="btn" id="againBtn">Làm lại 🔄</button>
+    <button class="btn secondary" id="wrongBtn">Chỉ làm lại các câu sai ✏️</button>
+  </div>
+
+</div>
+
+<script>
+const Q = [
+ {q:"She moved to Hanoi in 2018 and still lives there.", hint:"Rewrite with the Present Perfect.",
+  o:["She lived in Hanoi since 2018.","She has lived in Hanoi since 2018.","She has lived in Hanoi in 2018.","She is living in Hanoi since 2018."], a:1,
+  e:"Hành động bắt đầu năm 2018 và còn tiếp diễn đến hiện tại → dùng Hiện tại hoàn thành: <b>has lived</b> + <b>since 2018</b> (since + mốc thời gian). Không dùng 'in 2018' với thì hiện tại hoàn thành, và 'since' không đi với quá khứ đơn hay hiện tại tiếp diễn."},
+ {q:"The last time I saw him was last May.", hint:"Rewrite the sentence.",
+  o:["I didn’t see him since last May.","I haven’t seen him last May.","I haven’t seen him since last May.","I don’t see him since last May."], a:2,
+  e:"Cấu trúc: <b>The last time + S + V(quá khứ) + was + mốc</b> = <b>S + haven’t/hasn’t + V3 + since + mốc</b>. Vậy: I <b>haven’t seen</b> him <b>since</b> last May. 'since' luôn đi với thì hiện tại hoàn thành (không đi với quá khứ đơn hay hiện tại đơn)."},
+ {q:"This is the first time he has eaten sushi.", hint:"Rewrite the sentence.",
+  o:["He has never eaten sushi before.","He never ate sushi before now has.","He has ever eaten sushi before.","He didn’t never eat sushi before."], a:0,
+  e:"<b>This is the first time + S + have/has + V3</b> = <b>S + have/has never + V3 + before</b>. Vậy: He <b>has never eaten</b> sushi before. Đáp án C sai vì 'ever' dùng trong câu hỏi/phủ định, còn D mắc lỗi phủ định kép (didn’t never)."},
+ {q:"When did you buy that car? (You still own it.)", hint:"Rewrite as a question about duration.",
+  o:["How long did you have that car?","How long have you bought that car?","When have you had that car?","How long have you had that car?"], a:3,
+  e:"Hỏi về <b>khoảng thời gian</b> sở hữu còn kéo dài đến hiện tại → <b>How long + have/has + S + V3?</b> Vậy: How long <b>have you had</b> that car? Không dùng 'have bought' vì 'buy' là hành động xảy ra một lần, không kéo dài."},
+ {q:"It’s two years since I last played tennis.", hint:"Rewrite the sentence.",
+  o:["I haven’t played tennis for two years.","I didn’t play tennis for two years.","I haven’t played tennis since two years.","I hasn’t played tennis for two years."], a:0,
+  e:"<b>It’s + khoảng thời gian + since + S + last + V(quá khứ)</b> = <b>S + haven’t + V3 + for + khoảng thời gian</b>. 'two years' là khoảng thời gian nên dùng <b>for</b>, không dùng 'since'. Chủ ngữ 'I' đi với <b>haven’t</b> (không phải hasn’t)."},
+ {q:"They began working here in 2015, and they still work here.", hint:"Rewrite the sentence.",
+  o:["They worked here since 2015.","They have worked here in 2015.","They have worked here since 2015.","They work here since 2015."], a:2,
+  e:"Bắt đầu năm 2015 và còn tiếp tục → <b>have worked + since 2015</b>. Lưu ý: 'since' + mốc thời gian (2015). Không dùng 'in 2015' với hiện tại hoàn thành; không dùng 'since' với quá khứ đơn hoặc hiện tại đơn."},
+ {q:"Tom went to Spain and has now come back.", hint:"Choose the correct sentence.",
+  o:["Tom has gone to Spain.","Tom has been to Spain.","Tom is gone to Spain.","Tom was gone to Spain."], a:1,
+  e:"<b>has been to</b> = đã từng đến nơi nào đó và <b>đã quay về</b>. Còn <b>has gone to</b> = đã đi đến đó và <b>vẫn đang ở đó</b> (chưa về). Tom đã về rồi nên dùng: Tom <b>has been to</b> Spain."},
+ {q:"Which sentence is correct?", hint:"",
+  o:["I have seen that film last night.","I have saw that film last night.","I see that film last night.","I saw that film last night."], a:3,
+  e:"<b>last night</b> là mốc thời gian đã qua rõ ràng → dùng <b>Quá khứ đơn</b>: I <b>saw</b> that film last night. Không dùng hiện tại hoàn thành với last night, yesterday, ago... Ngoài ra 'have saw' sai vì V3 của see là <b>seen</b>."},
+ {q:"She became a teacher ten years ago and she is still a teacher.", hint:"Rewrite the sentence.",
+  o:["She was a teacher for ten years.","She has become a teacher for ten years.","She is a teacher since ten years.","She has been a teacher for ten years."], a:3,
+  e:"Với trạng thái kéo dài đến hiện tại dùng <b>have/has been</b> + <b>for + khoảng thời gian</b>: She <b>has been</b> a teacher <b>for ten years</b>. 'become' là hành động xảy ra một lần nên không đi với 'for ten years'."},
+ {q:"I last wrote to her in 2020.", hint:"Rewrite the sentence.",
+  o:["I didn’t write to her since 2020.","I haven’t written to her since 2020.","I haven’t wrote to her since 2020.","I haven’t written to her in 2020."], a:1,
+  e:"<b>last + V(quá khứ) + in 2020</b> = <b>haven’t + V3 + since 2020</b>. V3 của write là <b>written</b> (không phải wrote). Dùng <b>since</b> với mốc thời gian 2020, không dùng 'in 2020' trong thì hiện tại hoàn thành."},
+ {q:"Is this your first visit to Vietnam?", hint:"Choose the equivalent question.",
+  o:["Did you be to Vietnam before?","Have you ever went to Vietnam before?","Have you ever been to Vietnam before?","Were you ever to Vietnam before?"], a:2,
+  e:"Hỏi về trải nghiệm từ trước đến nay → <b>Have you ever + V3?</b> V3 của be là <b>been</b>: Have you ever <b>been</b> to Vietnam before? Đáp án B sai vì 'went' là quá khứ đơn, không phải V3 (V3 của go là gone/been)."},
+ {q:"My brother lost his wallet, so he doesn’t have it now.", hint:"Rewrite to emphasize the present result.",
+  o:["My brother has lose his wallet.","My brother is losing his wallet.","My brother has lost his wallet.","My brother has lost his wallet since."], a:2,
+  e:"Hành động vừa xảy ra và <b>kết quả còn ở hiện tại</b> (không còn ví) → Hiện tại hoàn thành: <b>has lost</b> (have/has + V3). 'lose' → 'lost' → 'lost'. Đáp án A sai dạng động từ, D thừa 'since'."},
+ {q:"Mozart ___ over 600 works before he died in 1791.", hint:"Complete the sentence.",
+  o:["has composed","composes","has been composing","composed"], a:3,
+  e:"Mozart đã mất năm 1791, là một mốc thời gian đã qua và hành động đã kết thúc hoàn toàn → dùng <b>Quá khứ đơn: composed</b>. Hiện tại hoàn thành không dùng được vì Mozart không còn sống."},
+ {q:"The film started at 7 pm. It is now 8 pm and the film is still on.", hint:"Rewrite the sentence.",
+  o:["The film was on for an hour.","The film has been on for an hour.","The film is on since an hour.","The film has been on since an hour."], a:1,
+  e:"Phim bắt đầu lúc 7 giờ và vẫn đang chiếu lúc 8 giờ → <b>has been on + for an hour</b> ('an hour' là khoảng thời gian nên dùng <b>for</b>). Dùng 'since' chỉ khi có mốc thời gian như 'since 7 pm'."},
+ {q:"We have known each other for ten years.", hint:"Rewrite using the Past Simple.",
+  o:["We have met ten years ago.","We met ten years ago.","We meet ten years ago.","We were meeting since ten years."], a:1,
+  e:"Chuyển sang quá khứ đơn: <b>We have known each other for ten years</b> = <b>We met ten years ago</b>. Có trạng từ <b>ago</b> thì bắt buộc dùng Quá khứ đơn (met), không dùng hiện tại hoàn thành."},
+ {q:"I finished my homework a moment ago.", hint:"Rewrite using “just”.",
+  o:["I have just finished my homework.","I have just finish my homework.","I just have finish my homework.","I am just finished my homework."], a:0,
+  e:"<b>just</b> (vừa mới) đi với Hiện tại hoàn thành, đứng giữa <b>have/has</b> và <b>V3</b>: I <b>have just finished</b> my homework. Đáp án B và C sai vì dùng 'finish' thay vì V3 'finished'."},
+ {q:"It’s only 2 pm and I ___ three coffees today.", hint:"Complete the sentence.",
+  o:["drank","have drunk","was drinking","drink"], a:1,
+  e:"'today' là khoảng thời gian <b>chưa kết thúc</b> (hôm nay vẫn còn tiếp diễn) → dùng Hiện tại hoàn thành: I <b>have drunk</b> three coffees today. V3 của drink là <b>drunk</b>."},
+ {q:"Which question is correct? (Answer: “Last summer.”)", hint:"",
+  o:["When have you gone to Da Nang?","When did you went to Da Nang?","When you went to Da Nang?","When did you go to Da Nang?"], a:3,
+  e:"Câu trả lời 'Last summer' là thời điểm đã qua xác định → hỏi bằng <b>When did + S + V(nguyên mẫu)?</b>: When <b>did you go</b> to Da Nang? Không dùng hiện tại hoàn thành với 'When', và sau 'did' động từ phải ở dạng nguyên mẫu (go, không phải went)."},
+ {q:"This is the third time she has missed the bus.", hint:"Rewrite the sentence.",
+  o:["She missed the bus three times so far.","She has miss the bus three times so far.","She has missed the bus three times so far.","She has missed the bus three times yesterday."], a:2,
+  e:"<b>so far</b> (cho đến bây giờ) đi với Hiện tại hoàn thành: She <b>has missed</b> the bus three times so far. A sai thì, B sai dạng động từ (miss → missed), D sai vì 'yesterday' chỉ dùng với quá khứ đơn."},
+ {q:"I have never seen such a beautiful sunset.", hint:"Rewrite the sentence.",
+  o:["It is the most beautiful sunset I saw ever.","It is the most beautiful sunset I had ever seen.","It is the most beautiful sunset I have ever seen.","It is the most beautiful sunset I ever have saw."], a:2,
+  e:"Cấu trúc so sánh nhất: <b>It is the + so sánh nhất + (that) + S + have/has + ever + V3</b>. Vậy: It is the most beautiful sunset I <b>have ever seen</b>. Trạng từ 'ever' đứng giữa have và V3."}
+];
+
+const L = ["A","B","C","D"];
+let order = [], idx = 0, score = 0, answers = [], locked = false, retryMode = false;
+const $ = id => document.getElementById(id);
+
+function startQuiz(list){
+  order = list; idx = 0; score = 0; answers = new Array(Q.length).fill(null);
+  if(!retryMode){ correctSet = new Set(); }
+  $("start").classList.add("hidden"); $("result").classList.add("hidden"); $("quiz").classList.remove("hidden");
+  showQ();
+}
+let correctSet = new Set();
+
+function showQ(){
+  locked = false;
+  const n = order[idx], item = Q[n];
+  $("qnum").textContent = "Câu " + (idx+1) + "/" + order.length + (retryMode ? " (ôn lại)" : "");
+  $("live").textContent = "✅ Đúng: " + score;
+  $("prog").style.width = (idx/order.length*100) + "%";
+  $("qtext").textContent = (retryMode ? "" : (n+1) + ". ") + item.q;
+  $("qhint").textContent = item.hint ? "→ " + item.hint : "";
+  $("fb").classList.add("hidden"); $("nextBtn").classList.add("hidden");
+  const box = $("opts"); box.innerHTML = "";
+  item.o.forEach((t,i)=>{
+    const b = document.createElement("button");
+    b.className = "opt";
+    b.innerHTML = '<span class="letter">'+L[i]+'</span><span></span>';
+    b.lastChild.textContent = t;
+    b.onclick = () => choose(i);
+    box.appendChild(b);
+  });
+  $("nextBtn").textContent = (idx === order.length-1) ? "Xem kết quả 🏁" : "Câu tiếp theo ▶";
+}
+
+function choose(i){
+  if(locked) return; locked = true;
+  const n = order[idx], item = Q[n], ok = (i === item.a);
+  answers[n] = i;
+  if(ok){ score++; correctSet.add(n); } else { correctSet.delete(n); }
+  const btns = $("opts").children;
+  for(let k=0;k<btns.length;k++){
+    btns[k].disabled = true;
+    if(k === item.a) btns[k].classList.add("correct");
+    else if(k === i) btns[k].classList.add("wrong");
+  }
+  const fb = $("fb");
+  fb.className = "feedback " + (ok ? "ok" : "bad");
+  fb.innerHTML = '<div class="title">' + (ok ? "🎉 Chính xác!" : "❌ Chưa đúng rồi. Đáp án đúng là " + L[item.a] + ".") + '</div>' + item.e;
+  $("live").textContent = "✅ Đúng: " + score;
+  $("nextBtn").classList.remove("hidden");
+  fb.scrollIntoView({behavior:"smooth", block:"nearest"});
+}
+
+function next(){
+  idx++;
+  if(idx >= order.length) return finish();
+  showQ();
+}
+
+function finish(){
+  $("quiz").classList.add("hidden"); $("result").classList.remove("hidden");
+  const total = correctSet.size;
+  $("rScore").textContent = total;
+  const pct = total/Q.length;
+  let emoji="🌟", msg="";
+  if(total===20){emoji="🏆"; msg="Xuất sắc! Em nắm chắc kiến thức rồi!";}
+  else if(pct>=0.8){emoji="🎉"; msg="Rất tốt! Chỉ cần ôn thêm một chút nữa thôi.";}
+  else if(pct>=0.5){emoji="👍"; msg="Khá ổn! Hãy đọc lại giải thích các câu sai và thử lại nhé.";}
+  else {emoji="📚"; msg="Đừng nản! Ôn lại cấu trúc have/has + V3 và làm lại nhé.";}
+  $("rEmoji").textContent = emoji; $("rMsg").textContent = "Em trả lời đúng " + total + " trên 20 câu. " + msg;
+
+  const list = $("reviewList"); list.innerHTML = "";
+  Q.forEach((item,n)=>{
+    const ok = correctSet.has(n);
+    const d = document.createElement("div");
+    d.className = "ritem " + (ok ? "r-ok" : "r-bad");
+    const your = answers[n]===null ? "Chưa làm" : L[answers[n]] + ". " + item.o[answers[n]];
+    d.innerHTML = '<span class="tag">' + (ok ? "✅" : "❌") + ' Câu ' + (n+1) + '.</span> ' + item.q +
+      '<br>Đáp án đúng: <b>' + L[item.a] + '. ' + item.o[item.a] + '</b>' +
+      (ok ? '' : '<br>Em chọn: ' + your);
+    list.appendChild(d);
+  });
+  $("wrongBtn").classList.toggle("hidden", total === Q.length);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+$("startBtn").onclick = () => { retryMode = false; startQuiz([...Array(Q.length).keys()]); };
+$("nextBtn").onclick = next;
+$("againBtn").onclick = () => { retryMode = false; startQuiz([...Array(Q.length).keys()]); };
+$("wrongBtn").onclick = () => {
+  const wrong = [...Array(Q.length).keys()].filter(n => !correctSet.has(n));
+  retryMode = true; score = 0; startQuiz(wrong);
+};
+</script>
+</body>
+</html>
